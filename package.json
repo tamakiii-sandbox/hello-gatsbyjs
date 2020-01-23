@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tamakiii-sandbox/hello-gatsbyjs/issues"
   },
-  "homepage": "https://github.com/tamakiii-sandbox/hello-gatsbyjs#readme"
+  "homepage": "https://github.com/tamakiii-sandbox/hello-gatsbyjs#readme",
+  "dependencies": {
+    "gatsby-cli": "^2.8.27"
+  }
 }
