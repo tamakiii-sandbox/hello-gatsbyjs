@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/tamakiii-sandbox/hello-gatsbyjs#readme",
   "dependencies": {
+    "gatsby": "^2.19.10",
     "gatsby-cli": "^2.8.27"
-  }
+  },
+  "devDependencies": {},
+  "keywords": []
 }
