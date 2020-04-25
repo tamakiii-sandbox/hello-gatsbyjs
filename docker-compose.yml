@@ -4,5 +4,8 @@ services:
     build:
       context: .
       target: ${ENVIRONMENT:-production-pseudo}
+    working_dir: /app/hello-world
+    ports:
+      - 8000:8000
     volumes:
       - .:/app

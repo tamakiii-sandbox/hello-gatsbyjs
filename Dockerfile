@@ -10,6 +10,9 @@ RUN apt-get update && \
 
 WORKDIR /app
 COPY . /app
+RUN make install
+
+ENV PATH /app/node_modules/.bin:$PATH
 
 COPY docker-entrypoint.sh /usr/local/sbin/
 ENTRYPOINT ["docker-entrypoint.sh"]
@@ -27,3 +30,4 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/cache/*
 
+RUN make -f dev.mk install
