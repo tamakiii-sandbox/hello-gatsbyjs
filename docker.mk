@@ -1,21 +1,28 @@
-.PHONY: help install build ash clean
+.PHONY: help install install-dev build clean @development
 
-IMAGE := hello-gatzbyjs
+ENVIRONMENTS := production-pseudo development
+ENVIRONMENT := production-pseudo
 
 help:
 	cat $(lastword $(MAKEFILE_LIST))
 
 install: \
+	.env \
 	build
 
+install-dev: \
+	development \
+	install
+
 build:
-	docker build -t $(IMAGE) .
+	docker-compose build
 
-ash:
-	docker run --rm -it -v $(PWD):/app -w /app $(IMAGE) $@
-
-develop:
-	docker run --rm -it -v $(PWD):/app -w /app -p 8000:8000 $(IMAGE) npx --no-install gatsby develop
+.env:
+	echo "ENVIRONMENT=$(ENVIRONMENT)" > $@
 
 clean:
-	docker image rm $(IMAGE)
+	rm -rf .env
+	docker-compose down -v
+
+$(ENVIRONMENTS):
+	$(eval ENVIRONMENT := $@)

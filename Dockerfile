@@ -1,11 +1,27 @@
-FROM node:13.7.0-alpine3.11 AS production-pseudo
+FROM node:13.13.0 AS production-pseudo
 
-RUN apk add --update --no-cache bash make && \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        bash \
+        make \
+        && \
+    apt-get clean && \
     rm -rf /var/cache/*
+
+WORKDIR /app
+COPY . /app
+
+COPY docker-entrypoint.sh /usr/local/sbin/
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 # --
 
 FROM production-pseudo AS development
 
-RUN apk add --update --no-cache git && \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        git \
+        && \
+    apt-get clean && \
     rm -rf /var/cache/*
+
