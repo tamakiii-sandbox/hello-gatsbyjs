@@ -14,5 +14,8 @@ build:
 ash:
 	docker run --rm -it -v $(PWD):/app -w /app $(IMAGE) $@
 
+develop:
+	docker run --rm -it -v $(PWD):/app -w /app -p 8000:8000 $(IMAGE) npx --no-install gatsby develop
+
 clean:
 	docker image rm $(IMAGE)
